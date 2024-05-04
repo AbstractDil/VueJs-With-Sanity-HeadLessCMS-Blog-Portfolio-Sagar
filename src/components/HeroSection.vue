@@ -1,4 +1,5 @@
 <script setup>
+import {RouterLink } from 'vue-router';
 defineProps({
   appName: {
     type: String,
@@ -23,13 +24,13 @@ defineProps({
             <span class="cursor" :class="{'typing': typeStatus}">&nbsp;</span>
           </h1>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-info btn-lg px-4 me-md-2">
+            <RouterLink type="button" class="btn btn-info btn-lg px-4 me-md-2" to="/about">
               <i class="bi bi-person-check"></i>  About Me
-            </button>
-            <button type="button" class="btn  btn-lg px-4 btn-outline-light"
+            </RouterLink>
+            <RouterLink  type="button" class="btn  btn-lg px-4 btn-outline-light" to="/blog"
             >
-            <i class="bi bi-emoji-heart-eyes"></i> Hire Me
-          </button>
+            <i class="bi bi-emoji-heart-eyes"></i> Read Blog
+          </RouterLink>
           </div>
         </div>
       </div>
