@@ -52,6 +52,16 @@ const router = createRouter({
 
   },
 
+  {
+    path : '/404',
+    name: 'PageNotFound',
+    component:() => import('../components/PageNotFound.vue'),
+    meta : {title : " 404 Page Not Found  | Sagar Nandy | Welcome to NANDYSAGAR.IN"}
+
+},
+
+
+
     {
         path : '/:catchAll(.*)',
         name: 'PageNotFound',
