@@ -22,19 +22,24 @@
       <div class="container my-5">
         <img class="img-thumbnail" v-if="post.mainImage" :src="urlFor(post.mainImage)" alt="Main Image" />
       </div>
-      <div class="mx-3" v-html="getBodyContent(post.body)"></div>
+      <!-- <div class="mx-3" v-html="getBodyContent(post.body)"></div> -->
+      <SanityBlocks :blocks="blocks" />
     </article>
   </div>
 </template>
 
 <script>
+import { SanityBlocks } from "sanity-blocks-vue-component";
 import sanity from "../../client.js";
 import imageUrlBuilder from "@sanity/image-url";
 
 export default {
+  name: "SingleBlogPost",
+  components: { SanityBlocks },
   data() {
     return {
-      post: null,
+      post: [],
+      blocks: [],
       formattedDate: '',
       loading: true // Set loading state to true initially
     };
@@ -63,6 +68,7 @@ export default {
         .fetch(query, { slug })
         .then((post) => {
           this.post = post;
+          this.blocks = post.body;
           this.setDocumentTitle(post.title); // Set document title with post title
           this.formatDate(post.publishedAt); // Format the published date
         })
@@ -79,7 +85,8 @@ export default {
         if (block._type === "block" && block.children) {
           block.children.forEach((child) => {
             if (child._type === "span" && child.text) {
-              content += child.text;
+               // Append HTML content with span tags
+          content += `<span>${child.text}</span>`;
             }
           });
         }
